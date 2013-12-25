@@ -91,7 +91,6 @@ int main(int argc, const char * argv[])
 
         NSFileHandle *input = [NSFileHandle fileHandleWithStandardInput];
         NSFileHandle *output = [NSFileHandle fileHandleWithStandardOutput];
-        NSFileHandle *error = [NSFileHandle fileHandleWithStandardError];
 
         NSData *inputData = [NSData dataWithData:[input readDataToEndOfFile]];
         NSString *inputString = [[NSString alloc] initWithData:inputData encoding:NSUTF8StringEncoding];
@@ -116,9 +115,6 @@ int main(int argc, const char * argv[])
                 [outputString insertString:resetEscape atIndex:tokenRange.location + tokenRange.length + offset];
                 offset += [resetEscape length];
             }
-
-            NSString *token = [inputString substringWithRange:tokenRange];
-            [error writeData:[[NSString stringWithFormat:@"%@: %@\n", token, tag] dataUsingEncoding:NSUTF8StringEncoding]];
         }];
 
         [output writeData:[outputString dataUsingEncoding:NSUTF8StringEncoding]];
