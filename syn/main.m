@@ -112,7 +112,6 @@ int main(int argc, const char * argv[])
         __block NSUInteger offset = [dimEscape length];
 
         [tagger enumerateTagsInRange:NSMakeRange(0, [inputString length]) scheme:NSLinguisticTagSchemeNameTypeOrLexicalClass options:options usingBlock:^(NSString *tag, NSRange tokenRange, NSRange sentenceRange, BOOL *stop) {
-
             if ([tags containsObject:tag]) {
                 [outputString insertString:brightEscape atIndex:tokenRange.location + offset];
                 offset += [brightEscape length];
