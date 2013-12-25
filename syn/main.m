@@ -95,8 +95,6 @@ int main(int argc, const char * argv[])
         NSData *inputData = [NSData dataWithData:[input readDataToEndOfFile]];
         NSString *inputString = [[NSString alloc] initWithData:inputData encoding:NSUTF8StringEncoding];
 
-        NSMutableString *outputString = [inputString mutableCopy];
-
         NSLinguisticTaggerOptions options = NSLinguisticTaggerOmitWhitespace | NSLinguisticTaggerOmitPunctuation | NSLinguisticTaggerJoinNames;
         NSLinguisticTagger *tagger = [[NSLinguisticTagger alloc] initWithTagSchemes:[NSLinguisticTagger availableTagSchemesForLanguage:[[NSLocale preferredLanguages] firstObject]] options:options];
 
@@ -104,18 +102,26 @@ int main(int argc, const char * argv[])
 
         tagger.string = normalizedString;
 
-        __block NSUInteger offset = 0;
-        static NSString *const imageEscape = @"\033[7m";
+        NSMutableString *outputString = [inputString mutableCopy];
+
+        static NSString *const dimEscape = @"\033[0;2m";
+        static NSString *const brightEscape = @"\033[0;1m";
         static NSString *const resetEscape = @"\033[0m";
+
+        [outputString insertString:dimEscape atIndex:0];
+        __block NSUInteger offset = [dimEscape length];
+
         [tagger enumerateTagsInRange:NSMakeRange(0, [inputString length]) scheme:NSLinguisticTagSchemeNameTypeOrLexicalClass options:options usingBlock:^(NSString *tag, NSRange tokenRange, NSRange sentenceRange, BOOL *stop) {
 
             if ([tags containsObject:tag]) {
-                [outputString insertString:imageEscape atIndex:tokenRange.location + offset];
-                offset += [imageEscape length];
-                [outputString insertString:resetEscape atIndex:tokenRange.location + tokenRange.length + offset];
-                offset += [resetEscape length];
+                [outputString insertString:brightEscape atIndex:tokenRange.location + offset];
+                offset += [brightEscape length];
+                [outputString insertString:dimEscape atIndex:tokenRange.location + tokenRange.length + offset];
+                offset += [dimEscape length];
             }
         }];
+
+        [outputString insertString:resetEscape atIndex:[outputString length]]; // reset
 
         [output writeData:[outputString dataUsingEncoding:NSUTF8StringEncoding]];
     }
