@@ -3,7 +3,7 @@
 //  syn
 //
 //  Created by Stephen Celis on 12/23/13.
-//  Copyright (c) 2013 stephencelis. All rights reserved.
+//  Copyright (c) 2013 stephencelis.
 //
 
 #import <Foundation/Foundation.h>
