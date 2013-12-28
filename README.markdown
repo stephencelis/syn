@@ -13,6 +13,8 @@ Inspired by [iA Writer Pro][1].
 
 ## Install
 
+**syn** requires OS X 10.7 or above.
+
 ``` sh
 $ curl -s https://raw.github.com/stephencelis/syn/master/bin/syn > syn && \
   chmod 755 syn && \
