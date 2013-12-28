@@ -11,7 +11,31 @@ Inspired by [iA Writer Pro][1].
 
 [1]: http://writer.pro
 
+## Install
+
+``` sh
+$ curl -s https://raw.github.com/stephencelis/syn/master/bin/syn > syn && \
+  chmod 755 syn && \
+  mv syn /usr/local/bin
+```
+
+Or clone/download the repository and run `make install` (**syn** uses
+[CocoaPods][2], which you may need to install first).
+
+[2]: http://cocoapods.org
+
 ## Usage
+
+_E.g._,
+
+``` sh
+# find pesky adverbs
+$ syn --adverbs < nanowrimo.txt
+# highlight all nouns
+$ syn --nouns --pronouns --personal-names --place-names < nanowrimo.txt
+```
+
+_-h_,
 
 ```
 usage: syn [tags] [-vh]
@@ -35,13 +59,6 @@ Tags:
     -v, --version                    Show version
     -h, --help                       Show this screen
 ```
-
-## Install
-
-Clone or download the repository, run `pod install` (**syn** uses
-[CocoaPods][2]), and build from Xcode.
-
-[2]: http://cocoapods.org
 
 ## License
 

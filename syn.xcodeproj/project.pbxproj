@@ -12,21 +12,7 @@
 		DCDBFA18186E72D8002EB29A /* SYNTerminalFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDBFA17186E72D8002EB29A /* SYNTerminalFormatter.m */; };
 		DCFE6B7C1868BEE70035A682 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCFE6B7B1868BEE70035A682 /* Foundation.framework */; };
 		DCFE6B7F1868BEE70035A682 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DCFE6B7E1868BEE70035A682 /* main.m */; };
-		DCFE6B831868BEE70035A682 /* syn.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = DCFE6B821868BEE70035A682 /* syn.1 */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		DCFE6B761868BEE70035A682 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/local/share/man/man1;
-			dstSubfolderSpec = 0;
-			files = (
-				DCFE6B831868BEE70035A682 /* syn.1 in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		763C1085C8FC4FF888205341 /* libPods-syn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-syn.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,7 +116,6 @@
 				34F5C97D69E0403AACC40B44 /* Check Pods Manifest.lock */,
 				DCFE6B741868BEE70035A682 /* Sources */,
 				DCFE6B751868BEE70035A682 /* Frameworks */,
-				DCFE6B761868BEE70035A682 /* CopyFiles */,
 				ABC4DD30FEE2496AB09EBB61 /* Copy Pods Resources */,
 			);
 			buildRules = (
@@ -295,6 +280,7 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "syn/syn-Prefix.pch";
+				INSTALL_PATH = "$(SRCROOT)/bin";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -305,6 +291,7 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "syn/syn-Prefix.pch";
+				INSTALL_PATH = "$(SRCROOT)/bin";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
