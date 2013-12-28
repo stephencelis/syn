@@ -37,7 +37,7 @@ $ syn --adverbs < nanowrimo.txt
 $ syn --nouns --pronouns --personal-names --place-names < nanowrimo.txt
 # examine the classics
 $ curl -s http://www.gutenberg.org/cache/epub/11231/pg11231.txt | \
-  syn -n |
+  syn -n | \
   less -r
 ```
 
