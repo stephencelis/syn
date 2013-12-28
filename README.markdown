@@ -44,7 +44,7 @@ $ curl -s http://www.gutenberg.org/cache/epub/11231/pg11231.txt | \
 _-h_,
 
 ```
-usage: syn [tags] [-vh]
+usage: syn [tags] [-f <formatter=term>] [-vh]
 Tags:
     -n, --nouns                      Match nouns
     -V, --verbs                      Match verbs
@@ -61,6 +61,9 @@ Tags:
     -I, --idioms                     Match idioms
     -H, --personal-names             Match personal (human) names
     -l, --place-names                Match place names (locations)
+
+Configuration:
+    -f, --formatter                  One of 'term' or 'json'
 
     -v, --version                    Show version
     -h, --help                       Show this screen
