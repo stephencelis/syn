@@ -5,6 +5,8 @@ Syntax control for the command line.
 **syn** uses OS X's natural language processing tools to tokenize and
 highlight text (from standard input) that matches specified tags.
 
+<img src='doc/demo.gif' alt='(Animated demo)' height='386' width='590'/>
+
 Inspired by [iA Writer Pro][1].
 
 [1]: http://writer.pro
