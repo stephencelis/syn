@@ -31,8 +31,12 @@ _E.g._,
 ``` sh
 # find pesky adverbs
 $ syn --adverbs < nanowrimo.txt
-# highlight all nouns
+# highlight nouns and noun-likes
 $ syn --nouns --pronouns --personal-names --place-names < nanowrimo.txt
+# examine the classics
+$ curl -s http://www.gutenberg.org/cache/epub/11231/pg11231.txt | \
+  syn -n |
+  less -r
 ```
 
 _-h_,
