@@ -11,7 +11,7 @@ build: $(COCOAPODS) $(SRC)
 
 install: bin/syn syn/syn.1
 	cp bin/syn $(PREFIX)/bin/syn
-	cp syn/syn.1 $(PREFIX)/share/man/syn.1
+	cp syn/syn.1 $(PREFIX)/share/man/man1/syn.1
 
 bin/syn: build
 
