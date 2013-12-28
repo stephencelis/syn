@@ -10,6 +10,7 @@
 		06E2F873FD904E73B2C99D11 /* libPods-syn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 763C1085C8FC4FF888205341 /* libPods-syn.a */; };
 		DCDBFA13186E5C2D002EB29A /* SYNProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDBFA12186E5C2D002EB29A /* SYNProcessor.m */; };
 		DCDBFA18186E72D8002EB29A /* SYNTerminalFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDBFA17186E72D8002EB29A /* SYNTerminalFormatter.m */; };
+		DCDBFA1B186EA740002EB29A /* SYNJSONFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDBFA1A186EA740002EB29A /* SYNJSONFormatter.m */; };
 		DCFE6B7C1868BEE70035A682 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCFE6B7B1868BEE70035A682 /* Foundation.framework */; };
 		DCFE6B7F1868BEE70035A682 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DCFE6B7E1868BEE70035A682 /* main.m */; };
 /* End PBXBuildFile section */
@@ -21,6 +22,8 @@
 		DCDBFA12186E5C2D002EB29A /* SYNProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNProcessor.m; sourceTree = "<group>"; };
 		DCDBFA16186E72D8002EB29A /* SYNTerminalFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTerminalFormatter.h; sourceTree = "<group>"; };
 		DCDBFA17186E72D8002EB29A /* SYNTerminalFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTerminalFormatter.m; sourceTree = "<group>"; };
+		DCDBFA19186EA740002EB29A /* SYNJSONFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNJSONFormatter.h; sourceTree = "<group>"; };
+		DCDBFA1A186EA740002EB29A /* SYNJSONFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNJSONFormatter.m; sourceTree = "<group>"; };
 		DCFE6B781868BEE70035A682 /* syn */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = syn; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCFE6B7B1868BEE70035A682 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DCFE6B7E1868BEE70035A682 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -54,6 +57,8 @@
 		DCDBFA15186E72BB002EB29A /* Formatters */ = {
 			isa = PBXGroup;
 			children = (
+				DCDBFA19186EA740002EB29A /* SYNJSONFormatter.h */,
+				DCDBFA1A186EA740002EB29A /* SYNJSONFormatter.m */,
 				DCDBFA16186E72D8002EB29A /* SYNTerminalFormatter.h */,
 				DCDBFA17186E72D8002EB29A /* SYNTerminalFormatter.m */,
 			);
@@ -192,6 +197,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCDBFA13186E5C2D002EB29A /* SYNProcessor.m in Sources */,
+				DCDBFA1B186EA740002EB29A /* SYNJSONFormatter.m in Sources */,
 				DCDBFA18186E72D8002EB29A /* SYNTerminalFormatter.m in Sources */,
 				DCFE6B7F1868BEE70035A682 /* main.m in Sources */,
 			);

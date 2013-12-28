@@ -24,9 +24,11 @@
 #import "SYNProcessor.h"
 
 #import "SYNTerminalFormatter.h"
+#import "SYNJSONFormatter.h"
 
 
 NSString *const SYNTerminalFormat = @"term";
+NSString *const SYNJSONFormat = @"json";
 
 
 @implementation SYNProcessor
@@ -37,6 +39,8 @@ NSString *const SYNTerminalFormat = @"term";
         self.outputString = [NSMutableString string];
         if ([format isEqualToString:SYNTerminalFormat]) {
             self.formatter = [SYNTerminalFormatter new];
+        } else if ([format isEqualToString:SYNJSONFormat]) {
+            self.formatter = [SYNJSONFormatter new];
         } else {
             return nil;
         }

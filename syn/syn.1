@@ -16,6 +16,7 @@
 .Sh SYNOPSIS             \" Section Header - required - don't modify
 .Nm
 .Op tags
+.Op Fl f Ar formatter
 .Op Fl vh                \" [-vh]
 .Sh DESCRIPTION          \" Section Header - required - don't modify
 .Nm
@@ -54,6 +55,12 @@ Match idioms
 Match personal (human) names
 .It Fl l, -place-names
 Match place names (locations)
+.El                      \" Ends the list
+.Pp
+Other flags:
+.Bl -tag -width -indent  \" Differs from above in tag removed
+.It Fl f, -formatter=<term,json>
+Use a different formatter. Default: term. Available: term, json.
 .El                      \" Ends the list
 .Pp
 Other flags:

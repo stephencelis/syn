@@ -39,7 +39,7 @@ int main(int argc, const char * argv[])
         // configuration
 
         NSMutableSet *tags = [NSMutableSet new];
-        NSString *format = SYNTerminalFormat; // FIXME
+        NSString *format = SYNTerminalFormat;
 
         // std{in,out,err}
 
@@ -51,7 +51,7 @@ int main(int argc, const char * argv[])
 
         BRLOptionParser *optionParser = [BRLOptionParser new];
 
-        [optionParser setBanner:@"usage: %@ [tags] [-vh]", processName];
+        [optionParser setBanner:@"usage: %@ [tags] [-f <formatter=term>] [-vh]", processName];
 
         BRLOptionParserOptionBlock (^add)(NSString *) = ^(NSString *tag) {
             return ^{ [tags addObject:tag]; };
@@ -74,6 +74,10 @@ int main(int argc, const char * argv[])
 
         [optionParser addOption:"personal-names" flag:'H' description:@"Match personal (human) names" block:add(NSLinguisticTagPersonalName)];
         [optionParser addOption:"place-names" flag:'l' description:@"Match place names (locations)" block:add(NSLinguisticTagPlaceName)];
+
+        [optionParser addSeparator];
+        [optionParser addSeparator:@"Configuration:"];
+        [optionParser addOption:"formatter" flag:'f' description:@"One of 'term' or 'json'" argument:&format];
 
         [optionParser addSeparator];
         [optionParser addOption:"version" flag:'v' description:@"Show version" block:^{
