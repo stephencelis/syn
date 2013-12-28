@@ -2,6 +2,6 @@
 # platform :ios, "6.0"
 
 target "syn" do
-  pod 'BRLOptionParser', :git => 'https://github.com/barrelage/BRLOptionParser.git', :tag => 'v0.1.0'
+  pod 'BRLOptionParser', '~> 0.1.0'
 end
 
