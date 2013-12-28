@@ -15,53 +15,52 @@
 .\" .Nd macro parsed for whatis database.
 .Sh SYNOPSIS             \" Section Header - required - don't modify
 .Nm
-.Op Fl nvaANdpPciCIohl   \" [-nvaANdpPciCIohl]
+.Op tags
+.Op Fl vh                \" [-vh]
 .Sh DESCRIPTION          \" Section Header - required - don't modify
 .Nm
-uses OS X's natural language processing tools to tokenize and highlight text (from standard input) that match specified tags (passed in as flags).
+uses OS X's natural language processing tools to tokenize and highlight text (from standard input) that matches specified tags (passed in as flags).
 .\" Underlining is accomplished with the .Ar macro
 .Pp                      \" Inserts a space
 Tag-setting flags:
 .Bl -tag -width -indent  \" Differs from above in tag removed 
-.It Fl a                 \"-a flag as a list item
-Match adjectives
-.It Fl A
-Match adverbs
-.It Fl c
-Match conjunctions
-.It Fl C
-Match classifiers
-.It Fl d
-Match determiners
-.It Fl C
-Match classifiers
-.It Fl H
-Match personal (human) names
-.It Fl i
-Match interjections
-.It Fl I
-Match idioms
-.It Fl l
-Match place names (locations)
-.It Fl n
+.It Fl n, -nouns        \"-n flag as a list item
 Match nouns
-.It Fl N
-Match pronouns
-.It Fl o
-Match "other" words
-.It Fl p
-Match particles
-.It Fl P
-Match prepositions
-.It Fl V
+.It Fl V, -verbs
 Match verbs
+.It Fl a, -adjectives
+Match adjectives
+.It Fl A, -adverbs
+Match adverbs
+.It Fl N, -pronouns
+Match pronouns
+.It Fl d, -determiners
+Match determiners
+.It Fl p, -particles
+Match particles
+.It Fl P, -prepositions
+Match prepositions
+.It Fl 1, -numbers
+Match numbers
+.It Fl c, -conjunctions
+Match conjunctions
+.It Fl i, -interjections
+Match interjections
+.It Fl C, -classifiers
+Match classifiers
+.It Fl I, -idioms
+Match idioms
+.It Fl H, -personal-names
+Match personal (human) names
+.It Fl l, -place-names
+Match place names (locations)
 .El                      \" Ends the list
 .Pp
 Other flags:
 .Bl -tag -width -indent  \" Differs from above in tag removed 
-.It Fl v
+.It Fl v, -version
 Prints the current version
-.It Fl h
+.It Fl h, -help
 Prints a message decribing usage
 .El                      \" Ends the list
 .\" .Sh ENVIRONMENT      \" May not be needed
@@ -84,15 +83,10 @@ Prints a message decribing usage
 .\" .It Diagnostic Tag
 .\" Diagnostic informtion here.
 .\" .El
-.\" .Sh SEE ALSO
+.Sh SEE ALSO
 .\" List links in ascending order by section, alphabetically within a section.
 .\" Please do not reference files that do not exist without filing a bug report
-.\" .Xr a 1 ,
-.\" .Xr b 1 ,
-.\" .Xr c 1 ,
-.\" .Xr a 2 ,
-.\" .Xr b 2 ,
-.\" .Xr a 3 ,
-.\" .Xr b 3
-.\" .Sh BUGS              \" Document known, unremedied bugs 
+.Xr https://github.com/stephencelis/syn ,
+.Xr http://writer.pro
+.\" .Sh BUGS              \" Document known, unremedied bugs
 .\" .Sh HISTORY           \" Document history if command behaves in a unique manner

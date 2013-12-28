@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06E2F873FD904E73B2C99D11 /* libPods-syn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 763C1085C8FC4FF888205341 /* libPods-syn.a */; };
+		DCDBFA13186E5C2D002EB29A /* SYNProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDBFA12186E5C2D002EB29A /* SYNProcessor.m */; };
+		DCDBFA18186E72D8002EB29A /* SYNTerminalFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDBFA17186E72D8002EB29A /* SYNTerminalFormatter.m */; };
 		DCFE6B7C1868BEE70035A682 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCFE6B7B1868BEE70035A682 /* Foundation.framework */; };
 		DCFE6B7F1868BEE70035A682 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DCFE6B7E1868BEE70035A682 /* main.m */; };
 		DCFE6B831868BEE70035A682 /* syn.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = DCFE6B821868BEE70035A682 /* syn.1 */; };
@@ -26,6 +29,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		763C1085C8FC4FF888205341 /* libPods-syn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-syn.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6344C58F9D24E1E850FE6CE /* Pods-syn.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-syn.xcconfig"; path = "Pods/Pods-syn.xcconfig"; sourceTree = "<group>"; };
+		DCDBFA11186E5C2D002EB29A /* SYNProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNProcessor.h; sourceTree = "<group>"; };
+		DCDBFA12186E5C2D002EB29A /* SYNProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNProcessor.m; sourceTree = "<group>"; };
+		DCDBFA16186E72D8002EB29A /* SYNTerminalFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTerminalFormatter.h; sourceTree = "<group>"; };
+		DCDBFA17186E72D8002EB29A /* SYNTerminalFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTerminalFormatter.m; sourceTree = "<group>"; };
 		DCFE6B781868BEE70035A682 /* syn */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = syn; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCFE6B7B1868BEE70035A682 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DCFE6B7E1868BEE70035A682 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -39,18 +48,39 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCFE6B7C1868BEE70035A682 /* Foundation.framework in Frameworks */,
+				06E2F873FD904E73B2C99D11 /* libPods-syn.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DCDBFA10186E5BF9002EB29A /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				DCDBFA11186E5C2D002EB29A /* SYNProcessor.h */,
+				DCDBFA12186E5C2D002EB29A /* SYNProcessor.m */,
+				DCDBFA15186E72BB002EB29A /* Formatters */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		DCDBFA15186E72BB002EB29A /* Formatters */ = {
+			isa = PBXGroup;
+			children = (
+				DCDBFA16186E72D8002EB29A /* SYNTerminalFormatter.h */,
+				DCDBFA17186E72D8002EB29A /* SYNTerminalFormatter.m */,
+			);
+			name = Formatters;
+			sourceTree = "<group>";
+		};
 		DCFE6B6F1868BEE70035A682 = {
 			isa = PBXGroup;
 			children = (
 				DCFE6B7D1868BEE70035A682 /* syn */,
 				DCFE6B7A1868BEE70035A682 /* Frameworks */,
 				DCFE6B791868BEE70035A682 /* Products */,
+				B6344C58F9D24E1E850FE6CE /* Pods-syn.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -66,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				DCFE6B7B1868BEE70035A682 /* Foundation.framework */,
+				763C1085C8FC4FF888205341 /* libPods-syn.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -75,6 +106,7 @@
 			children = (
 				DCFE6B7E1868BEE70035A682 /* main.m */,
 				DCFE6B821868BEE70035A682 /* syn.1 */,
+				DCDBFA10186E5BF9002EB29A /* Classes */,
 				DCFE6B801868BEE70035A682 /* Supporting Files */,
 			);
 			path = syn;
@@ -95,9 +127,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DCFE6B861868BEE70035A682 /* Build configuration list for PBXNativeTarget "syn" */;
 			buildPhases = (
+				34F5C97D69E0403AACC40B44 /* Check Pods Manifest.lock */,
 				DCFE6B741868BEE70035A682 /* Sources */,
 				DCFE6B751868BEE70035A682 /* Frameworks */,
 				DCFE6B761868BEE70035A682 /* CopyFiles */,
+				ABC4DD30FEE2496AB09EBB61 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -134,11 +168,46 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		34F5C97D69E0403AACC40B44 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		ABC4DD30FEE2496AB09EBB61 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-syn-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		DCFE6B741868BEE70035A682 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCDBFA13186E5C2D002EB29A /* SYNProcessor.m in Sources */,
+				DCDBFA18186E72D8002EB29A /* SYNTerminalFormatter.m in Sources */,
 				DCFE6B7F1868BEE70035A682 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -222,6 +291,7 @@
 		};
 		DCFE6B871868BEE70035A682 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B6344C58F9D24E1E850FE6CE /* Pods-syn.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "syn/syn-Prefix.pch";
@@ -231,6 +301,7 @@
 		};
 		DCFE6B881868BEE70035A682 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B6344C58F9D24E1E850FE6CE /* Pods-syn.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "syn/syn-Prefix.pch";
