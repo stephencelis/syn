@@ -30,23 +30,11 @@ static NSString *const SYNJSONFormatterRangeLengthKey = @"length";
 static NSString *const SYNJSONFormatterTokenKey = @"token";
 
 
-@interface SYNJSONFormatter ()
-
-@property (copy) NSString *inputString;
-
-@end
-
 
 @implementation SYNJSONFormatter
 
-- (void)processor:(SYNProcessor *)processor willProcessInput:(NSString *)inputString
+- (void)processor:(SYNProcessor *)processor processingTag:(NSString *)tag atRange:(NSRange)range token:(NSString *)token;
 {
-    self.inputString = inputString;
-}
-
-- (void)processor:(SYNProcessor *)processor processingTag:(NSString *)tag atRange:(NSRange)range
-{
-    NSString *token = [self.inputString substringWithRange:range];
     NSDictionary *dictionary = @{SYNJSONFormatterTagKey: tag,
                                  SYNJSONFormatterRangeLocationKey: @(range.location),
                                  SYNJSONFormatterRangeLengthKey: @(range.length),

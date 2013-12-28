@@ -1,4 +1,4 @@
-// SYNTerminalFormatter.h
+// SYNANSIFormatter.m
 //
 // Copyright (c) 2013 Stephen Celis (<stephen@stephencelis.com>)
 //
@@ -18,13 +18,44 @@
 // AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE
+// THE SOFTWARE.
 
 
-#import <Foundation/Foundation.h>
-#import "SYNProcessor.h"
+#import "SYNANSIFormatter.h"
 
 
-@interface SYNTerminalFormatter : NSObject <SYNFormatter>
+static NSString *const dimEscape = @"\033[0;2m";
+static NSString *const brightEscape = @"\033[0;1m";
+static NSString *const resetEscape = @"\033[0m";
+
+
+@interface SYNANSIFormatter ()
+
+@property NSUInteger offset;
+
+@end
+
+
+@implementation SYNANSIFormatter
+
+- (void)processor:(SYNProcessor *)processor willProcessInput:(NSString *)inputString
+{
+    processor.outputString = [inputString mutableCopy];
+    [processor.outputString insertString:dimEscape atIndex:0];
+    self.offset += [dimEscape length];
+}
+
+- (void)processor:(SYNProcessor *)processor processingTag:(NSString *)tag atRange:(NSRange)range token:(NSString *)token
+{
+    [processor.outputString insertString:brightEscape atIndex:range.location + self.offset];
+    self.offset += [brightEscape length];
+    [processor.outputString insertString:dimEscape atIndex:range.location + range.length + self.offset];
+    self.offset += [dimEscape length];
+}
+
+- (void)processorDidProcess:(SYNProcessor *)processor
+{
+    [processor.outputString insertString:resetEscape atIndex:[processor.outputString length]];
+}
 
 @end

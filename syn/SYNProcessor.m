@@ -22,12 +22,13 @@
 
 
 #import "SYNProcessor.h"
-
-#import "SYNTerminalFormatter.h"
+#import "SYNANSIFormatter.h"
+#import "SYNTableFormatter.h"
 #import "SYNJSONFormatter.h"
 
 
-NSString *const SYNTerminalFormat = @"term";
+NSString *const SYNANSIFormat = @"ansi";
+NSString *const SYNTableFormat = @"table";
 NSString *const SYNJSONFormat = @"json";
 
 
@@ -37,10 +38,12 @@ NSString *const SYNJSONFormat = @"json";
 {
     if (self = [super init]) {
         self.outputString = [NSMutableString string];
-        if ([format isEqualToString:SYNTerminalFormat]) {
-            self.formatter = [SYNTerminalFormatter new];
+        if ([format isEqualToString:SYNANSIFormat]) {
+            self.formatter = [SYNANSIFormatter new];
         } else if ([format isEqualToString:SYNJSONFormat]) {
             self.formatter = [SYNJSONFormatter new];
+        } else if ([format isEqualToString:SYNTableFormat]) {
+            self.formatter = [SYNTableFormatter new];
         } else {
             return nil;
         }
@@ -63,7 +66,8 @@ NSString *const SYNJSONFormat = @"json";
 
     [tagger enumerateTagsInRange:NSMakeRange(0, [inputString length]) scheme:NSLinguisticTagSchemeNameTypeOrLexicalClass options:options usingBlock:^(NSString *tag, NSRange tokenRange, NSRange sentenceRange, BOOL *stop) {
         if ([tags containsObject:tag]) {
-            [self.formatter processor:self processingTag:tag atRange:tokenRange];
+            NSString *token = [normalizedString substringWithRange:tokenRange];
+            [self.formatter processor:self processingTag:tag atRange:tokenRange token:token];
         }
     }];
 

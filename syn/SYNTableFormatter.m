@@ -1,4 +1,4 @@
-// SYNProcessor.h
+// SYNTableFormatter.m
 //
 // Copyright (c) 2013 Stephen Celis (<stephen@stephencelis.com>)
 //
@@ -21,35 +21,14 @@
 // THE SOFTWARE.
 
 
-#import <Foundation/Foundation.h>
+#import "SYNTableFormatter.h"
 
 
-extern NSString *const SYNANSIFormat;
-extern NSString *const SYNTableFormat;
-extern NSString *const SYNJSONFormat;
+@implementation SYNTableFormatter
 
-
-@class SYNProcessor;
-
-
-@protocol SYNFormatter <NSObject>
-
-- (void)processor:(SYNProcessor *)processor processingTag:(NSString *)tag atRange:(NSRange)range token:(NSString *)token;
-
-@optional
-
-- (void)processor:(SYNProcessor *)processor willProcessInput:(NSString *)inputString;
-- (void)processorDidProcess:(SYNProcessor *)processor;
-
-@end
-
-
-@interface SYNProcessor : NSObject
-
-@property id <SYNFormatter>formatter;
-@property NSMutableString *outputString;
-
-- (id)initWithFormat:(NSString *)format;
-- (NSString *)process:(NSString *)inputString tags:(NSSet *)tags;
+- (void)processor:(SYNProcessor *)processor processingTag:(NSString *)tag atRange:(NSRange)range token:(NSString *)token
+{
+    [processor.outputString appendFormat:@"%lu %lu %@ %@\n", (unsigned long)range.location, (unsigned long)range.length, tag, token];
+}
 
 @end

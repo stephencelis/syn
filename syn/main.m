@@ -39,9 +39,7 @@ int main(int argc, const char * argv[])
         // configuration
 
         NSMutableSet *tags = [NSMutableSet new];
-        NSString *format = SYNTerminalFormat;
-
-        // std{in,out,err}
+        NSString *format = SYNANSIFormat;
 
         NSFileHandle *standardInput = [NSFileHandle fileHandleWithStandardInput];
         NSFileHandle *standardOutput = [NSFileHandle fileHandleWithStandardOutput];
@@ -51,7 +49,7 @@ int main(int argc, const char * argv[])
 
         BRLOptionParser *optionParser = [BRLOptionParser new];
 
-        [optionParser setBanner:@"usage: %@ [tags] [-f <formatter=term>] [-vh]", processName];
+        [optionParser setBanner:@"usage: %@ [tags] [-f <formatter=ansi>] [-vh]", processName];
 
         BRLOptionParserOptionBlock (^add)(NSString *) = ^(NSString *tag) {
             return ^{ [tags addObject:tag]; };
@@ -77,7 +75,7 @@ int main(int argc, const char * argv[])
 
         [optionParser addSeparator];
         [optionParser addSeparator:@"Configuration:"];
-        [optionParser addOption:"formatter" flag:'f' description:@"One of 'term' or 'json'" argument:&format];
+        [optionParser addOption:"formatter" flag:'f' description:@"One of 'ansi', 'table', or 'json'" argument:&format];
 
         [optionParser addSeparator];
         [optionParser addOption:"version" flag:'v' description:@"Show version" block:^{

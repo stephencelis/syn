@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		06E2F873FD904E73B2C99D11 /* libPods-syn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 763C1085C8FC4FF888205341 /* libPods-syn.a */; };
 		DCDBFA13186E5C2D002EB29A /* SYNProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDBFA12186E5C2D002EB29A /* SYNProcessor.m */; };
-		DCDBFA18186E72D8002EB29A /* SYNTerminalFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDBFA17186E72D8002EB29A /* SYNTerminalFormatter.m */; };
+		DCDBFA18186E72D8002EB29A /* SYNANSIFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDBFA17186E72D8002EB29A /* SYNANSIFormatter.m */; };
 		DCDBFA1B186EA740002EB29A /* SYNJSONFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDBFA1A186EA740002EB29A /* SYNJSONFormatter.m */; };
+		DCDBFA38186F644A002EB29A /* SYNTableFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = DCDBFA37186F644A002EB29A /* SYNTableFormatter.m */; };
 		DCFE6B7C1868BEE70035A682 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCFE6B7B1868BEE70035A682 /* Foundation.framework */; };
 		DCFE6B7F1868BEE70035A682 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DCFE6B7E1868BEE70035A682 /* main.m */; };
 		DCFE6B831868BEE70035A682 /* syn.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = DCFE6B821868BEE70035A682 /* syn.1 */; };
@@ -34,10 +35,12 @@
 		B6344C58F9D24E1E850FE6CE /* Pods-syn.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-syn.xcconfig"; path = "Pods/Pods-syn.xcconfig"; sourceTree = "<group>"; };
 		DCDBFA11186E5C2D002EB29A /* SYNProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNProcessor.h; sourceTree = "<group>"; };
 		DCDBFA12186E5C2D002EB29A /* SYNProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNProcessor.m; sourceTree = "<group>"; };
-		DCDBFA16186E72D8002EB29A /* SYNTerminalFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTerminalFormatter.h; sourceTree = "<group>"; };
-		DCDBFA17186E72D8002EB29A /* SYNTerminalFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTerminalFormatter.m; sourceTree = "<group>"; };
+		DCDBFA16186E72D8002EB29A /* SYNANSIFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNANSIFormatter.h; sourceTree = "<group>"; };
+		DCDBFA17186E72D8002EB29A /* SYNANSIFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNANSIFormatter.m; sourceTree = "<group>"; };
 		DCDBFA19186EA740002EB29A /* SYNJSONFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNJSONFormatter.h; sourceTree = "<group>"; };
 		DCDBFA1A186EA740002EB29A /* SYNJSONFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNJSONFormatter.m; sourceTree = "<group>"; };
+		DCDBFA36186F644A002EB29A /* SYNTableFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNTableFormatter.h; sourceTree = "<group>"; };
+		DCDBFA37186F644A002EB29A /* SYNTableFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNTableFormatter.m; sourceTree = "<group>"; };
 		DCFE6B781868BEE70035A682 /* syn */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = syn; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCFE6B7B1868BEE70035A682 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DCFE6B7E1868BEE70035A682 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -71,10 +74,12 @@
 		DCDBFA15186E72BB002EB29A /* Formatters */ = {
 			isa = PBXGroup;
 			children = (
+				DCDBFA16186E72D8002EB29A /* SYNANSIFormatter.h */,
+				DCDBFA17186E72D8002EB29A /* SYNANSIFormatter.m */,
+				DCDBFA36186F644A002EB29A /* SYNTableFormatter.h */,
+				DCDBFA37186F644A002EB29A /* SYNTableFormatter.m */,
 				DCDBFA19186EA740002EB29A /* SYNJSONFormatter.h */,
 				DCDBFA1A186EA740002EB29A /* SYNJSONFormatter.m */,
-				DCDBFA16186E72D8002EB29A /* SYNTerminalFormatter.h */,
-				DCDBFA17186E72D8002EB29A /* SYNTerminalFormatter.m */,
 			);
 			name = Formatters;
 			sourceTree = "<group>";
@@ -211,9 +216,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCDBFA38186F644A002EB29A /* SYNTableFormatter.m in Sources */,
 				DCDBFA13186E5C2D002EB29A /* SYNProcessor.m in Sources */,
 				DCDBFA1B186EA740002EB29A /* SYNJSONFormatter.m in Sources */,
-				DCDBFA18186E72D8002EB29A /* SYNTerminalFormatter.m in Sources */,
+				DCDBFA18186E72D8002EB29A /* SYNANSIFormatter.m in Sources */,
 				DCFE6B7F1868BEE70035A682 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
