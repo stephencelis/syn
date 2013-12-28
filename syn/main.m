@@ -105,7 +105,7 @@ int main(int argc, const char * argv[])
 
         // invalid format
 
-        SYNProcessor *processor = [[SYNProcessor alloc] initWithFormat:format];
+        SYNProcessor *processor = [[SYNProcessor alloc] initWithFormat:format output:standardOutput];
         if (processor == nil) {
             [standardError writeData:[[NSString stringWithFormat:@"%@: invalid format `%@'\n", processName, format] dataUsingEncoding:NSUTF8StringEncoding]];
             [standardError writeData:[[NSString stringWithFormat:@"%@\n", optionParser.banner] dataUsingEncoding:NSUTF8StringEncoding]];
@@ -119,9 +119,7 @@ int main(int argc, const char * argv[])
 
         // format output
 
-        NSString *outputString = [processor process:inputString tags:tags];
-
-        [standardOutput writeData:[outputString dataUsingEncoding:NSUTF8StringEncoding]];
+        [processor process:inputString tags:tags];
     }
 
     return EXIT_SUCCESS;

@@ -28,7 +28,7 @@
 
 - (void)processor:(SYNProcessor *)processor processingTag:(NSString *)tag atRange:(NSRange)range token:(NSString *)token
 {
-    [processor.outputString appendFormat:@"%lu %lu %@ %@\n", (unsigned long)range.location, (unsigned long)range.length, tag, token];
+    [processor puts:@"%lu %lu %@ %@", (unsigned long)range.location, (unsigned long)range.length, tag, token];
 }
 
 @end

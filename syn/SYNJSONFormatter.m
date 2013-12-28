@@ -30,7 +30,6 @@ static NSString *const SYNJSONFormatterRangeLengthKey = @"length";
 static NSString *const SYNJSONFormatterTokenKey = @"token";
 
 
-
 @implementation SYNJSONFormatter
 
 - (void)processor:(SYNProcessor *)processor processingTag:(NSString *)tag atRange:(NSRange)range token:(NSString *)token;
@@ -39,13 +38,15 @@ static NSString *const SYNJSONFormatterTokenKey = @"token";
                                  SYNJSONFormatterRangeLocationKey: @(range.location),
                                  SYNJSONFormatterRangeLengthKey: @(range.length),
                                  SYNJSONFormatterTokenKey: token};
+
     NSError *error = nil;
     NSData *JSONData = [NSJSONSerialization dataWithJSONObject:dictionary options:0 error:&error];
     if (error) {
         // handle error
     }
     NSString *JSONString = [[NSString alloc] initWithData:JSONData encoding:NSUTF8StringEncoding];
-    [processor.outputString appendFormat:@"%@\n", JSONString];
+
+    [processor puts:JSONString];
 }
 
 @end

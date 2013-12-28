@@ -32,6 +32,7 @@ static NSString *const resetEscape = @"\033[0m";
 @interface SYNANSIFormatter ()
 
 @property NSUInteger offset;
+@property NSMutableString *inputString;
 
 @end
 
@@ -40,22 +41,31 @@ static NSString *const resetEscape = @"\033[0m";
 
 - (void)processor:(SYNProcessor *)processor willProcessInput:(NSString *)inputString
 {
-    processor.outputString = [inputString mutableCopy];
-    [processor.outputString insertString:dimEscape atIndex:0];
-    self.offset += [dimEscape length];
+    self.offset = 0;
+    self.inputString = [inputString mutableCopy];
+    [processor write:dimEscape];
 }
 
 - (void)processor:(SYNProcessor *)processor processingTag:(NSString *)tag atRange:(NSRange)range token:(NSString *)token
 {
-    [processor.outputString insertString:brightEscape atIndex:range.location + self.offset];
-    self.offset += [brightEscape length];
-    [processor.outputString insertString:dimEscape atIndex:range.location + range.length + self.offset];
-    self.offset += [dimEscape length];
+    NSString *chunk = [self substringFromOffsetToIndex:range.location];
+    chunk = [chunk stringByAppendingString:brightEscape];
+    chunk = [chunk stringByAppendingString:[self.inputString substringWithRange:range]];
+    chunk = [chunk stringByAppendingString:dimEscape];
+    [processor write:chunk];
+    self.offset = range.location + range.length;
 }
 
 - (void)processorDidProcess:(SYNProcessor *)processor
 {
-    [processor.outputString insertString:resetEscape atIndex:[processor.outputString length]];
+    NSString *chunk = [self substringFromOffsetToIndex:[self.inputString length]];
+    chunk = [chunk stringByAppendingString:resetEscape];
+    [processor write:chunk];
+}
+
+- (NSString *)substringFromOffsetToIndex:(NSUInteger)index
+{
+    return [self.inputString substringWithRange:NSMakeRange(self.offset, index - self.offset)];
 }
 
 @end

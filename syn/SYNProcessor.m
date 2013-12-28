@@ -32,12 +32,19 @@ NSString *const SYNTableFormat = @"table";
 NSString *const SYNJSONFormat = @"json";
 
 
+@interface SYNProcessor ()
+
+@property id <SYNFormatter>formatter;
+@property NSFileHandle *output;
+
+@end
+
+
 @implementation SYNProcessor
 
-- (id)initWithFormat:(NSString *)format
+- (id)initWithFormat:(NSString *)format output:(NSFileHandle *)output
 {
     if (self = [super init]) {
-        self.outputString = [NSMutableString string];
         if ([format isEqualToString:SYNANSIFormat]) {
             self.formatter = [SYNANSIFormatter new];
         } else if ([format isEqualToString:SYNJSONFormat]) {
@@ -47,11 +54,12 @@ NSString *const SYNJSONFormat = @"json";
         } else {
             return nil;
         }
+        self.output = output;
     }
     return self;
 }
 
-- (NSString *)process:(NSString *)inputString tags:(NSSet *)tags;
+- (void)process:(NSString *)inputString tags:(NSSet *)tags;
 {
     NSLinguisticTaggerOptions options = NSLinguisticTaggerOmitWhitespace | NSLinguisticTaggerOmitPunctuation | NSLinguisticTaggerJoinNames;
     NSLinguisticTagger *tagger = [[NSLinguisticTagger alloc] initWithTagSchemes:[NSLinguisticTagger availableTagSchemesForLanguage:[[NSLocale preferredLanguages] firstObject]] options:options];
@@ -74,8 +82,21 @@ NSString *const SYNJSONFormat = @"json";
     if ([self.formatter respondsToSelector:@selector(processorDidProcess:)]) {
         [self.formatter processorDidProcess:self];
     }
+}
 
-    return self.outputString;
+- (void)puts:(NSString *)string, ...
+{
+    va_list args;
+    [self write:[string stringByAppendingString:@"\n"], args];
+}
+
+- (void)write:(NSString *)string, ...
+{
+    va_list args;
+    va_start(args, string);
+    string = [[NSString alloc] initWithFormat:string arguments:args];
+    va_end(args);
+    [self.output writeData:[string dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 @end

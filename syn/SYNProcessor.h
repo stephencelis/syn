@@ -46,10 +46,9 @@ extern NSString *const SYNJSONFormat;
 
 @interface SYNProcessor : NSObject
 
-@property id <SYNFormatter>formatter;
-@property NSMutableString *outputString;
-
-- (id)initWithFormat:(NSString *)format;
-- (NSString *)process:(NSString *)inputString tags:(NSSet *)tags;
+- (id)initWithFormat:(NSString *)format output:(NSFileHandle *)output;
+- (void)process:(NSString *)inputString tags:(NSSet *)tags;
+- (void)puts:(NSString *)string, ...;
+- (void)write:(NSString *)string, ...;
 
 @end
