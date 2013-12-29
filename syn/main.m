@@ -89,7 +89,7 @@ int main(int argc, const char * argv[])
         }];
 
         NSError *error = nil;
-        [optionParser parse:&error];
+        [optionParser parseArgc:argc argv:argv error:&error];
         if (error) {
             [standardError writeData:[[NSString stringWithFormat:@"%@: %@\n", processName, [error localizedDescription]] dataUsingEncoding:NSUTF8StringEncoding]];
             exit(EXIT_FAILURE);
