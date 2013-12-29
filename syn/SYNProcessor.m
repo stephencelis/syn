@@ -87,7 +87,10 @@ NSString *const SYNJSONFormat = @"json";
 - (void)puts:(NSString *)string, ...
 {
     va_list args;
-    [self write:[string stringByAppendingString:@"\n"], args];
+    va_start(args, string);
+    string = [[NSString alloc] initWithFormat:[string stringByAppendingString:@"\n"] arguments:args];
+    va_end(args);
+    [self.output writeData:[string dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 - (void)write:(NSString *)string, ...
