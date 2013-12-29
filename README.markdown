@@ -21,10 +21,10 @@ $ curl -Ls https://github.com/stephencelis/syn/releases/download/v0.2.0/syn > sy
   mv syn /usr/local/bin
 ```
 
-Or clone/download the repository and run `make install` (**syn** uses
-[CocoaPods][2], which you may need to install first).
+Or clone/download the repository and run `make install` (requires
+[Xcode][2] to be installed).
 
-[2]: http://cocoapods.org
+[2]: https://developer.apple.com/xcode
 
 ## Usage
 
