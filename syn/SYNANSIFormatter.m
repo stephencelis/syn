@@ -63,6 +63,8 @@ static NSString *const resetEscape = @"\033[0m";
     [processor write:chunk];
 }
 
+#pragma mark - Private
+
 - (NSString *)substringFromOffsetToIndex:(NSUInteger)index
 {
     return [self.inputString substringWithRange:NSMakeRange(self.offset, index - self.offset)];
