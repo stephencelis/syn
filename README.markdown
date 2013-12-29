@@ -16,7 +16,7 @@ Inspired by [iA Writer Pro][1].
 **syn** requires OS X 10.7 or above.
 
 ``` sh
-$ curl -Ls https://github.com/stephencelis/syn/releases/download/v0.1.0/syn > syn && \
+$ curl -Ls https://github.com/stephencelis/syn/releases/download/v0.2.0/syn > syn && \
   chmod 755 syn && \
   mv syn /usr/local/bin
 ```
@@ -35,16 +35,29 @@ _E.g._,
 $ syn --adverbs < nanowrimo.txt
 # highlight nouns and noun-likes
 $ syn --nouns --pronouns --personal-names --place-names < nanowrimo.txt
-# examine the classics
-$ curl -s http://www.gutenberg.org/cache/epub/11231/pg11231.txt | \
-  syn -n | \
+# peruse the classics
+$ curl -Ls http://www.gutenberg.org/ebooks/11231.txt.utf-8 | \
+  syn -A | \
   less -r
+# generate listicles
+$ syn -a -ftable < moby-dick.txt | \
+  cut -d ' ' -f4 | sort -f | uniq -ci | sort -nr | head -10 | tr a-z A-Z
+ 441 OLD
+ 430 OTHER
+ 305 SUCH
+ 290 GREAT
+ 275 LAST
+ 238 LITTLE
+ 215 SAME
+ 199 OWN
+ 199 GOOD
+ 191 WHITE
 ```
 
 _-h_,
 
 ```
-usage: syn [tags] [-f <formatter=term>] [-vh]
+usage: syn [tags] [-f <formatter=ansi>] [-vh]
 Tags:
     -n, --nouns                      Match nouns
     -V, --verbs                      Match verbs
@@ -63,7 +76,7 @@ Tags:
     -l, --place-names                Match place names (locations)
 
 Configuration:
-    -f, --formatter                  One of 'term' or 'json'
+    -f, --formatter                  One of 'ansi', 'table', or 'json'
 
     -v, --version                    Show version
     -h, --help                       Show this screen

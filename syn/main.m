@@ -34,7 +34,7 @@ int main(int argc, const char * argv[])
         // constants
 
         NSString *processName = [[NSProcessInfo processInfo] processName];
-        static NSString *const VERSION = @"0.1.0";
+        static NSString *const VERSION = @"0.2.0";
 
         // configuration
 
