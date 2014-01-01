@@ -9,6 +9,6 @@
 // BRLOptionParser
 #define COCOAPODS_POD_AVAILABLE_BRLOptionParser
 #define COCOAPODS_VERSION_MAJOR_BRLOptionParser 0
-#define COCOAPODS_VERSION_MINOR_BRLOptionParser 1
+#define COCOAPODS_VERSION_MINOR_BRLOptionParser 2
 #define COCOAPODS_VERSION_PATCH_BRLOptionParser 0
 

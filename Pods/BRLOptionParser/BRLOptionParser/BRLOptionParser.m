@@ -138,28 +138,13 @@ typedef NS_ENUM(NSUInteger, BRLOptionArgument) {
     [self.options addObject:separator];
 }
 
-- (BOOL)parse:(NSError *__autoreleasing *)error
-{
-    return [self parseArguments:[[NSProcessInfo processInfo] arguments] error:error];
-}
-
-- (BOOL)parseArguments:(NSArray *)arguments error:(NSError *__autoreleasing *)error
-{
-    int argc = (int)[arguments count];
-    const char ** argv = malloc(sizeof(char *) * (argc + 1));
-
-    [arguments enumerateObjectsUsingBlock:^(NSString *arg, NSUInteger idx, BOOL *stop) {
-        argv[idx] = [arg UTF8String];
-    }];
-    argv[argc] = NULL;
-
-    return [self parseArgc:argc argv:argv error:error];
-}
-
 - (BOOL)parseArgc:(int)argc argv:(const char **)argv error:(NSError *__autoreleasing *)error
 {
-    optind = 0;
+    return [self parseArgc:argc argv:argv longOnly:NO error:error];
+}
 
+- (BOOL)parseArgc:(int)argc argv:(const char **)argv longOnly:(BOOL)longOnly error:(NSError *__autoreleasing *)error
+{
     NSMapTable *mapTable = NSCreateMapTable(NSIntegerMapKeyCallBacks, NSNonRetainedObjectMapValueCallBacks, [self.options count]);
 
     NSUInteger i = 0;
@@ -193,41 +178,59 @@ typedef NS_ENUM(NSUInteger, BRLOptionArgument) {
 
     opterr = 0;
 
-    while ((ch = getopt_long(argc, (char **)argv, short_options, long_options, &long_options_index)) != -1) {
-        BRLOption *option = nil;
+    int (* getopt_long_method)(int, char * const *, const char *, const struct option *, int *);
+    getopt_long_method = longOnly ? &getopt_long_only : &getopt_long;
 
-        switch (ch) {
-            case '?': {
-                if (error) {
-                    NSString *arg = [NSString stringWithUTF8String:argv[optind - 1]];
-                    if (optopt) {
-                        option = (__bridge BRLOption *)NSMapGet(mapTable, (const void *)(NSUInteger)optopt);
-                    }
+    int cached_optind = optind;
+    while ((ch = getopt_long_method(argc, (char **)argv, short_options, long_options, &long_options_index)) != -1) {
+        @try {
+            BRLOption *option = nil;
 
-                    if (option && option.argument == BRLOptionArgumentRequired) {
-                        *error = [NSError errorWithDomain:BRLOptionParserErrorDomain code:BRLOptionParserErrorCodeRequired userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"option `%@' requires an argument", arg]}];
-                    } else {
-                        *error = [NSError errorWithDomain:BRLOptionParserErrorDomain code:BRLOptionParserErrorCodeUnrecognized userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"unrecognized option `%@'", arg]}];
+            switch (ch) {
+                case '?': {
+                    if (error) {
+                        // I wish this could be done more cleanly, but getopt doesn't appear to expose the current failing option as originally input.
+                        NSString *arg = [NSString stringWithUTF8String:argv[cached_optind]];
+                        if ([arg hasPrefix:@"--"]) {
+                            arg = [[arg componentsSeparatedByString:@"="] firstObject];
+                        } else if (optopt) {
+                            arg = [NSString stringWithFormat:@"-%c", optopt];
+                        }
+
+                        if (optopt) {
+                            option = (__bridge BRLOption *)NSMapGet(mapTable, (const void *)(NSUInteger)optopt);
+                        }
+
+                        if (option && option.argument == BRLOptionArgumentRequired) {
+                            *error = [NSError errorWithDomain:BRLOptionParserErrorDomain code:BRLOptionParserErrorCodeRequired userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"option `%@' requires an argument", arg]}];
+                        } else {
+                            *error = [NSError errorWithDomain:BRLOptionParserErrorDomain code:BRLOptionParserErrorCodeUnrecognized userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"unrecognized option `%@'", arg]}];
+                        }
                     }
+                    return NO;
+                    break;
                 }
-                return NO;
-                break;
-            }
-            case 0:
-                option = (__bridge BRLOption *)NSMapGet(mapTable, (const void *)long_options[long_options_index].name);
-                break;
-            default: {
-                option = (__bridge BRLOption *)NSMapGet(mapTable, (const void *)(NSUInteger)ch);
-                break;
-            }
-        }
+                case ':':
 
-        if (option.argument == BRLOptionArgumentRequired) {
-            BRLOptionParserOptionBlockWithArgument block = option.block;
-            block([NSString stringWithUTF8String:optarg]);
-        } else {
-            BRLOptionParserOptionBlock block = option.block;
-            block();
+                    break;
+                case 0:
+                    option = (__bridge BRLOption *)NSMapGet(mapTable, (const void *)long_options[long_options_index].name);
+                    break;
+                default: {
+                    option = (__bridge BRLOption *)NSMapGet(mapTable, (const void *)(NSUInteger)ch);
+                    break;
+                }
+            }
+
+            if (option.argument == BRLOptionArgumentRequired) {
+                BRLOptionParserOptionBlockWithArgument block = option.block;
+                block([NSString stringWithUTF8String:optarg]);
+            } else {
+                BRLOptionParserOptionBlock block = option.block;
+                block();
+            }
+        } @finally {
+            cached_optind = optind;
         }
     }
 

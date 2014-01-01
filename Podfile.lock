@@ -1,15 +1,10 @@
 PODS:
-  - BRLOptionParser (0.1.0)
+  - BRLOptionParser (0.2.0)
 
 DEPENDENCIES:
-  - BRLOptionParser (from `https://github.com/barrelage/BRLOptionParser.git`, commit `241fc61ed3e1f02608c32aa01306863e1eed7a9e`)
-
-EXTERNAL SOURCES:
-  BRLOptionParser:
-    :commit: 241fc61ed3e1f02608c32aa01306863e1eed7a9e
-    :git: https://github.com/barrelage/BRLOptionParser.git
+  - BRLOptionParser (~> 0.2.0)
 
 SPEC CHECKSUMS:
-  BRLOptionParser: 80ebe4ca447c14e19f8aefcc2e667ce0d55438c4
+  BRLOptionParser: 3dd5de87aeb42b8a4ca35927bab19a9f6efe542a
 
 COCOAPODS: 0.29.0
