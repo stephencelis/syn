@@ -16,7 +16,7 @@ Inspired by [iA Writer Pro][1].
 **syn** requires OS X 10.7 or above.
 
 ``` sh
-$ curl -Ls https://github.com/stephencelis/syn/releases/download/v0.2.0/syn > syn && \
+$ curl -Ls https://github.com/stephencelis/syn/releases/download/v0.2.1/syn > syn && \
   chmod 755 syn && \
   mv syn /usr/local/bin
 ```
