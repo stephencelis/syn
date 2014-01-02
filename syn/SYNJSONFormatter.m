@@ -39,11 +39,7 @@ static NSString *const SYNJSONFormatterTokenKey = @"token";
                                  SYNJSONFormatterRangeLengthKey: @(range.length),
                                  SYNJSONFormatterTokenKey: token};
 
-    NSError *error = nil;
-    NSData *JSONData = [NSJSONSerialization dataWithJSONObject:dictionary options:0 error:&error];
-    if (error) {
-        // handle error
-    }
+    NSData *JSONData = [NSJSONSerialization dataWithJSONObject:dictionary options:0 error:nil];
     NSString *JSONString = [[NSString alloc] initWithData:JSONData encoding:NSUTF8StringEncoding];
 
     [processor puts:JSONString];
