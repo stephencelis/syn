@@ -45,7 +45,6 @@
 		DCFE6B781868BEE70035A682 /* syn */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = syn; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCFE6B7B1868BEE70035A682 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DCFE6B7E1868BEE70035A682 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		DCFE6B811868BEE70035A682 /* syn-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "syn-Prefix.pch"; sourceTree = "<group>"; };
 		DCFE6B821868BEE70035A682 /* syn.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = syn.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,17 +126,8 @@
 				DCFE6B7E1868BEE70035A682 /* main.m */,
 				DCFE6B821868BEE70035A682 /* syn.1 */,
 				DCDBFA10186E5BF9002EB29A /* Classes */,
-				DCFE6B801868BEE70035A682 /* Supporting Files */,
 			);
 			path = syn;
-			sourceTree = "<group>";
-		};
-		DCFE6B801868BEE70035A682 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				DCFE6B811868BEE70035A682 /* syn-Prefix.pch */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -316,8 +306,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6E3564D7E8E9A8336F12D740 /* Pods-syn.debug.xcconfig */;
 			buildSettings = {
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "syn/syn-Prefix.pch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -326,8 +314,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 72CE4740C5BECD58C4722AF1 /* Pods-syn.release.xcconfig */;
 			buildSettings = {
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "syn/syn-Prefix.pch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
