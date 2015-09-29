@@ -7,18 +7,18 @@ highlight text (from standard input) that matches specified tags.
 
 <img src='doc/demo.gif' alt='(Animated demo)'/>
 
-Inspired by [iA Writer Pro][1].
+Inspired by [iA Writer][1].
 
-[1]: http://writer.pro
+[1]: http://ia.net/writer
 
 ## Install
 
 **syn** requires OS X 10.7 or above.
 
 ``` sh
-$ curl -Ls https://github.com/stephencelis/syn/releases/download/v0.2.1/syn > syn && \
-  chmod 755 syn && \
-  mv syn /usr/local/bin
+$ curl -LOs https://github.com/stephencelis/syn/releases/download/v0.2.1/syn \
+  && chmod 755 syn \
+  && mv syn /usr/local/bin
 ```
 
 Or clone/download the repository and run `make install` (requires
