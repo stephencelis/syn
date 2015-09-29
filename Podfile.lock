@@ -1,10 +1,10 @@
 PODS:
-  - BRLOptionParser (0.2.0)
+  - BRLOptionParser (0.3.1)
 
 DEPENDENCIES:
-  - BRLOptionParser (~> 0.2.0)
+  - BRLOptionParser (~> 0.3.1)
 
 SPEC CHECKSUMS:
-  BRLOptionParser: 3dd5de87aeb42b8a4ca35927bab19a9f6efe542a
+  BRLOptionParser: a03256a8ff003ca1f5376c55f55f210e085a3958
 
-COCOAPODS: 0.29.0
+COCOAPODS: 0.38.2

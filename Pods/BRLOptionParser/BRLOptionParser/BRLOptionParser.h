@@ -1,6 +1,6 @@
 // BRLOptionParser.h
 //
-// Copyright (c) 2013 Stephen Celis (<stephen@stephencelis.com>)
+// Copyright © 2013–2015 Stephen Celis (<stephen@stephencelis.com>)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,7 @@
 // THE SOFTWARE.
 
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 
 typedef void (^BRLOptionParserOptionBlock)();
@@ -39,6 +39,11 @@ typedef NS_ENUM(NSUInteger, BRLOptionParserErrorCode) {
 
 @interface BRLOptionParser : NSObject
 
++ (instancetype)parser;
++ (instancetype)longOnlyParser;
+
+@property (nonatomic, getter = isLongOnly) BOOL longOnly;
+
 @property (nonatomic, copy) NSString *banner;
 
 - (void)setBanner:(NSString *)banner, ...;
@@ -53,6 +58,5 @@ typedef NS_ENUM(NSUInteger, BRLOptionParserErrorCode) {
 - (void)addSeparator:(NSString *)separator;
 
 - (BOOL)parseArgc:(int)argc argv:(const char **)argv error:(NSError **)error;
-- (BOOL)parseArgc:(int)argc argv:(const char **)argv longOnly:(BOOL)longOnly error:(NSError **)error;
 
 @end

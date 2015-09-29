@@ -1,6 +1,6 @@
 // BRLOptionParser.m
 //
-// Copyright (c) 2013 Stephen Celis (<stephen@stephencelis.com>)
+// Copyright © 2013–2015 Stephen Celis (<stephen@stephencelis.com>)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -47,6 +47,8 @@ typedef NS_ENUM(NSUInteger, BRLOptionArgument) {
 
 @implementation BRLOption
 
+@synthesize description = _description;
+
 + (instancetype)optionWithName:(char *)name flag:(unichar)flag description:(NSString *)description block:(BRLOptionParserOptionBlock)block
 {
     BRLOption *option = [[self alloc] initWithName:name flag:flag description:description argument:BRLOptionArgumentNone block:block];
@@ -62,11 +64,11 @@ typedef NS_ENUM(NSUInteger, BRLOptionArgument) {
 - (instancetype)initWithName:(char *)name flag:(unichar)flag description:(NSString *)description argument:(BRLOptionArgument)argument block:(id)block
 {
     if (self = [super init]) {
-        self.argument = argument;
-        self.name = name;
-        self.flag = flag;
-        self.block = block;
-        self.description = description;
+        _argument = argument;
+        _name = name;
+        _flag = flag;
+        _block = block;
+        _description = description;
     }
     return self;
 }
@@ -83,11 +85,25 @@ typedef NS_ENUM(NSUInteger, BRLOptionArgument) {
 
 @implementation BRLOptionParser
 
++ (instancetype)parser
+{
+    return [self new];
+}
+
++ (instancetype)longOnlyParser
+{
+    BRLOptionParser *parser = [self parser];
+    if (parser) {
+        parser.longOnly = YES;
+    }
+    return parser;
+}
+
 - (id)init
 {
     if (self = [super init]) {
-        [self setBanner:@"usage: %@ [options]", [[NSProcessInfo processInfo] processName]];
-        self.options = [NSMutableArray array];
+        [self setBanner:@"usage: %@ [options]", [NSProcessInfo processInfo].processName];
+        _options = [NSMutableArray new];
     }
     return self;
 }
@@ -140,18 +156,13 @@ typedef NS_ENUM(NSUInteger, BRLOptionArgument) {
 
 - (BOOL)parseArgc:(int)argc argv:(const char **)argv error:(NSError *__autoreleasing *)error
 {
-    return [self parseArgc:argc argv:argv longOnly:NO error:error];
-}
-
-- (BOOL)parseArgc:(int)argc argv:(const char **)argv longOnly:(BOOL)longOnly error:(NSError *__autoreleasing *)error
-{
-    NSMapTable *mapTable = NSCreateMapTable(NSIntegerMapKeyCallBacks, NSNonRetainedObjectMapValueCallBacks, [self.options count]);
+    NSMapTable *mapTable = NSCreateMapTable(NSIntegerMapKeyCallBacks, NSNonRetainedObjectMapValueCallBacks, self.options.count);
 
     NSUInteger i = 0;
     NSUInteger c = 0;
 
-    struct option * long_options = malloc(([self.options count] + 1) * sizeof(struct option));
-    char * short_options = malloc((([self.options count] * 2) + 1) * sizeof(char));
+    struct option * long_options = malloc((self.options.count + 1) * sizeof(struct option));
+    char * short_options = malloc(((self.options.count * 2) + 1) * sizeof(char));
 
     for (id each in self.options) {
         if (![each isKindOfClass:[BRLOption class]]) {
@@ -179,7 +190,7 @@ typedef NS_ENUM(NSUInteger, BRLOptionArgument) {
     opterr = 0;
 
     int (* getopt_long_method)(int, char * const *, const char *, const struct option *, int *);
-    getopt_long_method = longOnly ? &getopt_long_only : &getopt_long;
+    getopt_long_method = self.isLongOnly ? &getopt_long_only : &getopt_long;
 
     int cached_optind = optind;
     while ((ch = getopt_long_method(argc, (char **)argv, short_options, long_options, &long_options_index)) != -1) {
@@ -191,14 +202,19 @@ typedef NS_ENUM(NSUInteger, BRLOptionArgument) {
                     if (error) {
                         // I wish this could be done more cleanly, but getopt doesn't appear to expose the current failing option as originally input.
                         NSString *arg = [NSString stringWithUTF8String:argv[cached_optind]];
-                        if ([arg hasPrefix:@"--"]) {
-                            arg = [[arg componentsSeparatedByString:@"="] firstObject];
+                        if ([arg hasPrefix:[self longPrefix]]) {
+                            arg = [arg componentsSeparatedByString:@"="].firstObject;
                         } else if (optopt) {
                             arg = [NSString stringWithFormat:@"-%c", optopt];
                         }
 
                         if (optopt) {
                             option = (__bridge BRLOption *)NSMapGet(mapTable, (const void *)(NSUInteger)optopt);
+                        } else {
+                            NSString *longOption = [NSString stringWithFormat:@"%@%s", [self longPrefix], long_options[long_options_index].name];
+                            if ([arg isEqualToString:longOption]) {
+                                option = (__bridge BRLOption *)NSMapGet(mapTable, (const void *)long_options[long_options_index].name);
+                            }
                         }
 
                         if (option && option.argument == BRLOptionArgumentRequired) {
@@ -249,7 +265,7 @@ typedef NS_ENUM(NSUInteger, BRLOptionArgument) {
 
     NSMutableArray *description = [NSMutableArray arrayWithObject:self.banner];
     for (id each in self.options) {
-        NSMutableString *line = [NSMutableString string];
+        NSMutableString *line = [NSMutableString new];
         if ([each isKindOfClass:[BRLOption class]]) {
             BRLOption *option = each;
             [line appendString:@"    "];
@@ -260,11 +276,11 @@ typedef NS_ENUM(NSUInteger, BRLOptionArgument) {
                 [line appendString:@"    "];
             }
             if (option.name) {
-                [line appendFormat:@"--%-24s   ", option.name];
+                [line appendFormat:@"%@%-24s   ", [self longPrefix], option.name];
             } else {
                 [line appendString:@"                             "];
             }
-            if ([line length] > 37) {
+            if (line.length > 37) {
                 line = trimLine(line);
                 [line appendString:@"\n                                     "];
             }
@@ -278,6 +294,13 @@ typedef NS_ENUM(NSUInteger, BRLOptionArgument) {
         [description addObject:line];
     }
     return [[description componentsJoinedByString:@"\n"] stringByAppendingString:@"\n"];
+}
+
+#pragma mark -
+
+- (NSString *)longPrefix
+{
+    return self.isLongOnly ? @"-" : @"--";
 }
 
 @end

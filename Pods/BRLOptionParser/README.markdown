@@ -2,8 +2,8 @@
 
 A short wrapper for [getopt_long(3)][3] (and getopt_long_only(3)).
 
-[1]: https://travis-ci.org/barrelage/BRLOptionParser.png
-[2]: https://travis-ci.org/barrelage/BRLOptionParser
+[1]: https://img.shields.io/travis/stephencelis/BRLOptionParser.svg?style=flat
+[2]: https://travis-ci.org/stephencelis/BRLOptionParser
 [3]: https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man3/getopt_long.3.html
 
 ## Install
@@ -12,7 +12,7 @@ With [CocoaPods][4]:
 
 ``` rb
 # Podfile
-pod 'BRLOptionParser', '~> 0.2.0'
+pod 'BRLOptionParser', '~> 0.3.1'
 ```
 
 [4]: http://cocoapods.org
@@ -43,7 +43,7 @@ int main(int argc, const char * argv[])
 
         NSError *error = nil;
         if (![options parseArgc:argc argv:argv error:&error]) {
-            const char * message = [[error localizedDescription] UTF8String];
+            const char * message = error.localizedDescription.UTF8String;
             fprintf(stderr, "%s: %s\n", argv[0], message);
             exit(EXIT_FAILURE);
         }
@@ -52,7 +52,7 @@ int main(int argc, const char * argv[])
             fprintf(stderr, "(Preparing to say hello...)\n");
         }
 
-        printf("Hello, %s!\n", [name UTF8String]);
+        printf("Hello, %s!\n", name.UTF8String);
     }
 
     return EXIT_SUCCESS;
@@ -83,6 +83,6 @@ hello: unrecognized option `--goodbye'
 
 ## License
 
-BRLOptionParsing is available under the MIT license. See the LICENSE
-file for more information.
+BRLOptionParser is available under the MIT license. See the LICENSE file
+for more information.
 

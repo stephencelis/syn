@@ -31,8 +31,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6E3564D7E8E9A8336F12D740 /* Pods-syn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-syn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-syn/Pods-syn.debug.xcconfig"; sourceTree = "<group>"; };
+		72CE4740C5BECD58C4722AF1 /* Pods-syn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-syn.release.xcconfig"; path = "Pods/Target Support Files/Pods-syn/Pods-syn.release.xcconfig"; sourceTree = "<group>"; };
 		763C1085C8FC4FF888205341 /* libPods-syn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-syn.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B6344C58F9D24E1E850FE6CE /* Pods-syn.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-syn.xcconfig"; path = "Pods/Pods-syn.xcconfig"; sourceTree = "<group>"; };
 		DCDBFA11186E5C2D002EB29A /* SYNProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNProcessor.h; sourceTree = "<group>"; };
 		DCDBFA12186E5C2D002EB29A /* SYNProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYNProcessor.m; sourceTree = "<group>"; };
 		DCDBFA16186E72D8002EB29A /* SYNANSIFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYNANSIFormatter.h; sourceTree = "<group>"; };
@@ -61,6 +62,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8DBC71F34C331232A3DA349B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6E3564D7E8E9A8336F12D740 /* Pods-syn.debug.xcconfig */,
+				72CE4740C5BECD58C4722AF1 /* Pods-syn.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		DCDBFA10186E5BF9002EB29A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -90,7 +100,7 @@
 				DCFE6B7D1868BEE70035A682 /* syn */,
 				DCFE6B7A1868BEE70035A682 /* Frameworks */,
 				DCFE6B791868BEE70035A682 /* Products */,
-				B6344C58F9D24E1E850FE6CE /* Pods-syn.xcconfig */,
+				8DBC71F34C331232A3DA349B /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -206,7 +216,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-syn-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-syn/Pods-syn-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -304,7 +314,7 @@
 		};
 		DCFE6B871868BEE70035A682 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B6344C58F9D24E1E850FE6CE /* Pods-syn.xcconfig */;
+			baseConfigurationReference = 6E3564D7E8E9A8336F12D740 /* Pods-syn.debug.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "syn/syn-Prefix.pch";
@@ -314,7 +324,7 @@
 		};
 		DCFE6B881868BEE70035A682 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B6344C58F9D24E1E850FE6CE /* Pods-syn.xcconfig */;
+			baseConfigurationReference = 72CE4740C5BECD58C4722AF1 /* Pods-syn.release.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "syn/syn-Prefix.pch";
