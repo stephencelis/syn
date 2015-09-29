@@ -62,7 +62,7 @@ NSString *const SYNJSONFormat = @"json";
 - (void)process:(NSString *)inputString tags:(NSSet *)tags;
 {
     NSLinguisticTaggerOptions options = NSLinguisticTaggerOmitWhitespace | NSLinguisticTaggerOmitPunctuation | NSLinguisticTaggerJoinNames;
-    NSLinguisticTagger *tagger = [[NSLinguisticTagger alloc] initWithTagSchemes:[NSLinguisticTagger availableTagSchemesForLanguage:[[NSLocale preferredLanguages] firstObject]] options:options];
+    NSLinguisticTagger *tagger = [[NSLinguisticTagger alloc] initWithTagSchemes:[NSLinguisticTagger availableTagSchemesForLanguage:[NSLocale preferredLanguages].firstObject] options:options];
 
     NSString *normalizedString = [[inputString stringByReplacingOccurrencesOfString:@"\n\n" withString:@". "] stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
 
@@ -72,7 +72,7 @@ NSString *const SYNJSONFormat = @"json";
         [self.formatter processor:self willProcessInput:inputString];
     }
 
-    [tagger enumerateTagsInRange:NSMakeRange(0, [inputString length]) scheme:NSLinguisticTagSchemeNameTypeOrLexicalClass options:options usingBlock:^(NSString *tag, NSRange tokenRange, NSRange sentenceRange, BOOL *stop) {
+    [tagger enumerateTagsInRange:NSMakeRange(0, inputString.length) scheme:NSLinguisticTagSchemeNameTypeOrLexicalClass options:options usingBlock:^(NSString *tag, NSRange tokenRange, NSRange sentenceRange, BOOL *stop) {
         if ([tags containsObject:tag]) {
             NSString *token = [normalizedString substringWithRange:tokenRange];
             [self.formatter processor:self processingTag:tag atRange:tokenRange token:token];

@@ -58,7 +58,7 @@ static NSString *const resetEscape = @"\033[0m";
 
 - (void)processorDidProcess:(SYNProcessor *)processor
 {
-    NSString *chunk = [self substringFromOffsetToIndex:[self.inputString length]];
+    NSString *chunk = [self substringFromOffsetToIndex:self.inputString.length];
     chunk = [chunk stringByAppendingString:resetEscape];
     [processor write:chunk];
 }
